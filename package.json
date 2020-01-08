@@ -1,10 +1,10 @@
 {
-    "name": "natours",
+    "name": "UPIC",
     "version": "1.0.0",
     "description": "Learning node, express and mongoDB",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon server.js",
+        "start": "node server.js",
         "start:prod": "NODE_ENV=production nodemon server.js"
     },
     "author": "Jonas Schmedtmann",
