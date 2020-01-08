@@ -1,4 +1,5 @@
 const cors = require('cors');
+const dotenv = require('dotenv');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -9,6 +10,8 @@ const swaggerDocument = require('./swagger.json');
 const imageRouter = require('./routes/imageRoutes');
 const userRouter = require('./routes/userRoutes');
 const commentRouter = require('./routes/commentRoutes');
+
+dotenv.config({ path: './config.env' });
 
 const app = express();
 
@@ -59,6 +62,8 @@ app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
+
+console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
