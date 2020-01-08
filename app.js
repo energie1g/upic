@@ -60,6 +60,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+}
+
 app.use((req, res, next) => {
     next();
 });
