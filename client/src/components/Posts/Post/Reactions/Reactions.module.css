@@ -1,0 +1,14 @@
+.Reactions {
+  display: flex;
+  justify-content: center;
+}
+
+.Reactions div {
+  display: flex;
+  float: left;
+}
+
+.HeartIcon {
+  color: red;
+  cursor: pointer;
+}

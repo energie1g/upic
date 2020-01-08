@@ -1,0 +1,59 @@
+.CompteHead {
+  display: flex;
+  flex-direction: row;
+  margin-top: 14px;
+  margin-left: 70px;
+}
+
+.profileImage {
+  overflow: inherit;
+}
+
+.NameAndButton {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  margin-left: 40px;
+  font-weight: 550;
+}
+
+.UserSubInfo {
+  width: 300px;
+  display: flex;
+  justify-content: space-around;
+  margin-left: 40px;
+}
+
+.NameAndButton {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  font-size: 28px;
+  width: 300px;
+  margin-right: 40px;
+}
+
+.NameAndButton div {
+  display: flex;
+  align-items: center;
+}
+
+.PostContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Post {
+  width: 293px;
+  height: 293px;
+  margin-right: 28px;
+  margin-bottom: 28px;
+  cursor: pointer;
+  background-size: cover;
+}
+
+.PostImage {
+  width: 100%;
+  height: 100%;
+}

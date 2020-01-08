@@ -1,0 +1,17 @@
+.Reaction {
+  display: flex;
+}
+
+.Reaction svg {
+  margin-right: 9px;
+}
+
+.Reaction span {
+  margin-top: -2.4px;
+  margin-right: 50px;
+}
+
+.Reaction svg,
+span {
+  float: left;
+}

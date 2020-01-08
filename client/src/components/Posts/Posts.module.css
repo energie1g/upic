@@ -1,0 +1,14 @@
+.Posts {
+  overflow: hidden;
+}
+
+.Pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 55px;
+  margin-bottom: 55px;
+}
+
+.Pagination div {
+  margin: 0px auto;
+}

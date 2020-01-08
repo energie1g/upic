@@ -1,0 +1,58 @@
+.UpperPost {
+  width: 500px;
+  margin: 20px auto 20px;
+  padding: 20px;
+  display: flex;
+  border-radius: 30px;
+  border: 0px solid black;
+  box-shadow: 0px 0px 14px -3px rgba(0, 0, 0, 0.4);
+}
+
+.Name {
+  display: flex;
+  justify-content: center;
+}
+
+.UpperPostInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.UpperPostDate,
+.UpperPostAt {
+  opacity: 0.8;
+  color: gray;
+  margin-left: 5px;
+  text-align: start;
+}
+
+.UpperPostDesc {
+  text-align: initial;
+  width: 400px;
+  margin-top: 10px;
+}
+
+.UpperPostID {
+  text-align: initial;
+}
+
+.BlueAt {
+  color: lightblue;
+}
+
+.UpperPostName {
+  cursor: pointer;
+}
+
+.UpperPostName:hover {
+  text-decoration: underline;
+}
+
+.UpperPostAt {
+  cursor: pointer;
+}
+
+.UpperPostAt:hover {
+  text-decoration: underline;
+}

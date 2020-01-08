@@ -1,0 +1,24 @@
+.upload-header {
+  width: 330px;
+  font-weight: 550;
+  font-size: 32px;
+  margin: 30px 30px;
+}
+
+.upload-description {
+  margin-bottom: 10px;
+}
+
+.upload {
+  text-align: center;
+}
+
+.upload-main {
+  height: 300px;
+}
+
+.upload-main_text {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}

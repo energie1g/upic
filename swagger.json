@@ -1,0 +1,680 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "UPic API",
+        "description": "Upic API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Comments",
+            "description": "API for comments in the system"
+        },
+        {
+            "name": "Images",
+            "description": "API for images in the system"
+        }
+    ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "Authorization"
+        }
+    },
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["Users"],
+                "description": "Create a new user",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The user that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New user is created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{userId}/follow": {
+            "parameters": [
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "string"
+                }
+            ],
+            "patch": {
+                "summary": "Follow another user with the given ID",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "name": "abonne",
+                        "in": "body",
+                        "required": true,
+                        "description": "ID of the follower",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User with the given ID is followed by the \"abonne\"",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/logout": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Log the user out with the given ID",
+                "responses": {
+                    "200": {
+                        "description": "User is logged out",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/signup": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Sign up the user",
+                "responses": {
+                    "201": {
+                        "description": "User is registered",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    },
+                    "404": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another error"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The user that we want to register",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": ["application/json"]
+            }
+        },
+        "/users/login": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Log the user in.",
+                "responses": {
+                    "201": {
+                        "description": "User is logged in",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    },
+
+                    "401": {
+                        "description": "Unauthorized access",
+                        "schema": {
+                            "example": "L'email ou le mot de passe sont incorrectes"
+                        }
+                    },
+
+                    "400": {
+                        "description": "Unauthorized access",
+                        "schema": {
+                            "example": "Vous devriez fournir l'email et le mot de passe"
+                        }
+                    },
+
+                    "404": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another Error"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The user that we want to register",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": ["application/json"]
+            }
+        },
+        "/users/{userId}": {
+            "parameters": [
+                {
+                    "name": "userId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get user with given ID",
+                "responses": {
+                    "200": {
+                        "description": "User is found",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user with given ID",
+                "tags": ["Users"],
+                "responses": {
+                    "200": {
+                        "description": "User is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update user with given ID",
+                "tags": ["Users"],
+                "responses": {
+                    "200": {
+                        "description": "User is updated",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    }
+                }
+            }
+        },
+        "/comments": {
+            "post": {
+                "tags": ["Comments"],
+                "description": "Create a new comment",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The comment that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New comment is created",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Comments"],
+                "summary": "Get all comments in the system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "404": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    }
+                }
+            }
+        },
+        "/comments/{commentId}": {
+            "parameters": [
+                {
+                    "name": "commentId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of comment that we want to find",
+                    "type": "string"
+                }
+            ],
+            "patch": {
+                "summary": "Update comment with given user id",
+                "tags": ["Comments"],
+                "responses": {
+                    "200": {
+                        "description": "Comment is updated",
+                        "schema": {
+                            "$ref": "#/definitions/Comment"
+                        }
+                    },
+                    "404": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete comment with given ID",
+                "tags": ["Comments"],
+                "responses": {
+                    "200": {
+                        "description": "Comment is deleted",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "404": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Comments"],
+                "summary": "Get a comment by its given ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    },
+                    "404": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    }
+                }
+            }
+        },
+        "/images": {
+            "post": {
+                "tags": ["Images"],
+                "description": "Create a new image",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "The image that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Image"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "201": {
+                        "description": "New image is created",
+                        "schema": {
+                            "$ref": "#/definitions/Image"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Images"],
+                "summary": "Get all images in the system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Image"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/images/{imageId}": {
+            "parameters": [
+                {
+                    "name": "imageId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of image that we want to find",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": ["Images"],
+                "summary": "Get a image by its given ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    },
+                    "404": {
+                        "description": "Another error",
+                        "schema": {
+                            "example": "Another error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    }
+                }
+            }
+        },
+        "/images/{imageId}/like": {
+            "parameters": [
+                {
+                    "name": "imageId",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of image that we want to find",
+                    "type": "string"
+                }
+            ],
+            "patch": {
+                "summary": "Like/Dislike the image with the given ID",
+                "tags": ["Images"],
+                "parameters": [
+                    {
+                        "name": "liker",
+                        "in": "body",
+                        "required": true,
+                        "description": "ID of the user that wants to like the image",
+                        "schema": {
+                            "$ref": "#/definitions/Liker"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Image is liked or disliked",
+                        "schema": {
+                            "$ref": "#/definitions/Image"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "example": "Internal server error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": ["nom", "email", "_id", "password"],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "photo": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "images": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Image"
+                    }
+                },
+                "likedImages": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Image"
+                    }
+                },
+                "comments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                },
+                "abonnes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    }
+                },
+                "abonnements": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    }
+                },
+                "nAbonnes": {
+                    "type": "number"
+                }
+            }
+        },
+        "Comment": {
+            "required": ["_id", "comment", "user", "image"],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "comment": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/User",
+                    "uniqueItems": true
+                },
+                "image": {
+                    "$ref": "#/definitions/Image",
+                    "uniqueItems": true
+                }
+            }
+        },
+        "Image": {
+            "required": ["_id", "imgUrl", "user", "path"],
+            "properties": {
+                "_id": {
+                    "type": "string",
+                    "uniqueItems": true
+                },
+                "destionation": {
+                    "type": "string"
+                },
+                "encoding": {
+                    "type": "string"
+                },
+                "fieldname": {
+                    "type": "string"
+                },
+                "mimetype": {
+                    "type": "string"
+                },
+                "originalname": {
+                    "type": "string"
+                },
+                "path": {
+                    "type": "string"
+                },
+                "size": "number",
+                "imgUrl": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/User"
+                },
+                "likes": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "likers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    }
+                },
+                "comments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Comment"
+                    }
+                }
+            }
+        },
+        "Liker": {
+            "required": ["liker"],
+            "liker": {
+                "type": "string"
+            }
+        },
+        "Images": {
+            "type": "array",
+            "$ref": "#/definitions/Image"
+        },
+        "Comments": {
+            "type": "array",
+            "$ref": "#/definitions/Comment"
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+.ProfileImage {
+  width: 50%;
+  height: 45px;
+  border-radius: 50%;
+  margin: 0 14px 0 0;
+  cursor: pointer;
+}
+
+.ProfileImage img {
+  border-radius: 50%;
+  overflow: hidden;
+}
