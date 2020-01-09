@@ -5,7 +5,8 @@
     "main": "app.js",
     "scripts": {
         "start": "node server.js",
-        "start:prod": "NODE_ENV=production node server.js"
+        "start:prod": "NODE_ENV=production node server.js",
+        "heroku-postbuild": "cd client && npm install && yarn build"
     },
     "author": "Jonas Schmedtmann",
     "license": "ISC",
