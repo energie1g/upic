@@ -49,21 +49,21 @@ class Login extends React.Component {
         this.setState({ loading });
 
         try {
-            const res = await axios({
-                method: 'POST',
-                // url: "http://127.0.0.1:8000/api/v1/users/login",
-                url: '/api/v1/users/login',
-                data: {
-                    email,
-                    password
-                },
-                withCredentials: true
-            });
-            console.log(loading);
-            if (res && res.data && res.data.status === 'success') {
-                loading = false;
-                window.location.assign('/');
-            }
+            // const res = await axios({
+            //     method: 'POST',
+            //     // url: "http://127.0.0.1:8000/api/v1/users/login",
+            //     url: '/api/v1/users/login',
+            //     data: {
+            //         email,
+            //         password
+            //     },
+            //     withCredentials: true
+            // });
+            // console.log(loading);
+            // if (res && res.data && res.data.status === 'success') {
+            //     loading = false;
+            //     window.location.assign('/');
+            // }
         } catch (err) {
             loading = false;
             errorMessage = err.response
