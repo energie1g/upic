@@ -53,7 +53,7 @@ class Compte extends React.Component {
             try {
                 currentUser = await axios({
                     method: 'GET',
-                    url: `/api/v1/users/${this.props.match.params.id}`
+                    url: `${SERVER_URL}/${this.props.match.params.id}`
                 });
 
                 isFollowing = await axios.get(

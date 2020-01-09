@@ -1,20 +1,20 @@
 const express = require('express');
 const {
-  getAllUsers,
-  getUser,
-  createUser,
-  updateUser,
-  deleteUser,
-  toggleAbonneUser,
-  getAbonnes,
-  updatePImage
+    getAllUsers,
+    getUser,
+    createUser,
+    updateUser,
+    deleteUser,
+    toggleAbonneUser,
+    getAbonnes,
+    updatePImage
 } = require('../controllers/userController');
 
 const {
-  signup,
-  login,
-  isLoggedIn,
-  logout
+    signup,
+    login,
+    isLoggedIn,
+    logout
 } = require('../controllers/authController');
 
 const router = express.Router();
@@ -23,18 +23,18 @@ const router = express.Router();
 
 router.post('/signup', signup);
 router.post('/login', login);
-router.get('/logout', logout);
+// router.get('/logout', logout);
 
 router
-  .route('/')
-  .get(getAllUsers)
-  .post(createUser);
+    .route('/')
+    .get(getAllUsers)
+    .post(createUser);
 
 router
-  .route('/:id')
-  .get(getUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+    .route('/:id')
+    .get(getUser)
+    .patch(updateUser)
+    .delete(deleteUser);
 
 // S'abonner ou !
 router.route('/:id/follow').patch(toggleAbonneUser);
