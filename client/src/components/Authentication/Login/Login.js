@@ -51,7 +51,6 @@ class Login extends React.Component {
         try {
             const res = await axios({
                 method: 'POST',
-                // url: "http://127.0.0.1:8000/api/v1/users/login",
                 url: '/api/v1/users/login',
                 data: {
                     email,
@@ -59,7 +58,7 @@ class Login extends React.Component {
                 },
                 withCredentials: true
             });
-            console.log('DAADAADADADA', res);
+            console.log('DAADAADADADA');
             if (res && res.data && res.data.status === 'success') {
                 loading = false;
                 window.location.assign('/');

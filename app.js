@@ -66,7 +66,6 @@ app.use(express.static(`${__dirname}/public`));
 console.log(process.env.NODE_ENV);
 
 if (process.env.NODE_ENV === 'production') {
-    console.log('PRODUCTION');
     app.use(express.static('client/build'));
 
     app.get('*', (req, res) => {
