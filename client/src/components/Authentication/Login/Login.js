@@ -59,10 +59,10 @@ class Login extends React.Component {
                 withCredentials: true
             });
             console.log(res);
-            // if (res && res.data && res.data.status === 'success') {
-            //     loading = false;
-            //     window.location.assign('/');
-            // }
+            if (res && res.data && res.data.status === 'success') {
+                loading = false;
+                window.location.assign('/');
+            }
         } catch (err) {
             loading = false;
             errorMessage = err.response
